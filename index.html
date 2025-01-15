@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotas do Alto Paranaíba</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>ACITSIGOL - Rotas logísticas do Alto Paranaíba</h1>
+  </header>
+
+  <main>
+    <form id="rotaForm">
+      <label for="origem">Selecione a cidade de origem:</label>
+      <select id="origem" name="origem" required>
+        <option value="Patrocinio">Patrocínio</option>
+        <option value="Araxa">Araxá</option>
+        <option value="Uberlandia">Uberlândia</option>
+        <option value="Serra do Salitre">Serra do Salitre</option>
+        <option value="Monte Carmelo">Monte Carmelo</option>
+        <option value="Coromandel">Coromandel</option>
+        <option value="Carmo do Paranaiba">Carmo do Paranaíba</option>
+        <option value="Rio Paranaiba">Rio Paranaíba</option>
+        <option value="Guimarania">Guimarânia</option>
+        <option value="Perdizes">Perdizes</option>
+        <option value="Patos de Minas">Patos de Minas</option>
+      </select>
+
+      <label for="destino">Selecione a cidade de destino:</label>
+      <select id="destino" name="destino" required>
+        <option value="Patrocinio">Patrocínio</option>
+        <option value="Araxa">Araxá</option>
+        <option value="Uberlandia">Uberlândia</option>
+        <option value="Serra do Salitre">Serra do Salitre</option>
+        <option value="Monte Carmelo">Monte Carmelo</option>
+        <option value="Coromandel">Coromandel</option>
+        <option value="Carmo do Paranaiba">Carmo do Paranaíba</option>
+        <option value="Rio Paranaiba">Rio Paranaíba</option>
+        <option value="Guimarania">Guimarânia</option>
+        <option value="Perdizes">Perdizes</option>
+        <option value="Patos de Minas">Patos de Minas</option>
+      </select>
+
+      <button type="submit">Buscar Rotas</button>
+    </form>
+
+    <section id="resultados">
+      <h2>Melhores Rotas</h2>
+      <div id="rotaContainer"></div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

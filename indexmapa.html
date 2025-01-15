@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotas Otimizadas</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 80vh;
+      width: 100%;
+    }
+    #details {
+      padding: 10px;
+      background-color: #f4f4f4;
+      border: 1px solid #ccc;
+      margin-top: 10px;
+    }
+    .route-details {
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rotas Otimizadas</h1>
+  <div id="map"></div>
+  <div id="details">
+    <h3>Detalhes das Rotas</h3>
+    <div id="route-info"></div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map').setView([-18.8543, -46.4409], 8); // Centro aproximado das cidades
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+    }).addTo(map);
+
+    // Coordenadas geográficas das cidades
+    const cityCoordinates = {
+      'Patrocinio': { lat: -18.9433, lng: -46.9922 },
+      'Araxa': { lat: -19.5902, lng: -46.9433 },
+      'Uberlandia': { lat: -18.9128, lng: -48.2755 },
+      'Serra do Salitre': { lat: -19.1081, lng: -46.6961 },
+      'Monte Carmelo': { lat: -18.7247, lng: -47.4985 },
+      'Coromandel': { lat: -18.4733, lng: -47.1987 },
+      'Carmo do Paranaiba': { lat: -19.0004, lng: -46.3165 },
+      'Rio Paranaiba': { lat: -19.1868, lng: -46.2456 },
+      'Guimarania': { lat: -18.8426, lng: -47.1067 },
+      'Perdizes': { lat: -19.3435, lng: -47.2902 },
+      'Patos de Minas': { lat: -18.5789, lng: -46.5143 }
+    };
+
+    // Exemplo de rotas geradas pelo algoritmo do back-end
+    const routes = [
+      { cities: ['Patrocinio', 'Araxa', 'Uberlandia'], color: 'red', distance: 320, cost: 50, time: '4h' },
+      { cities: ['Patrocinio', 'Monte Carmelo', 'Coromandel'], color: 'blue', distance: 280, cost: 45, time: '3h 30m' },
+      { cities: ['Patrocinio', 'Serra do Salitre', 'Guimarania'], color: 'green', distance: 250, cost: 40, time: '3h' }
+    ];
+
+    // Desenha as rotas no mapa
+    function drawRoutes() {
+      for (const route of routes) {
+        const coordinates = [];
+        for (const city of route.cities) {
+          if (cityCoordinates[city]) {
+            coordinates.push([cityCoordinates[city].lat, cityCoordinates[city].lng]);
+          }
+        }
+
+        if (coordinates.length > 1) {
+          const polyline = L.polyline(coordinates, { color: route.color, weight: 5 }).addTo(map);
+          map.fitBounds(polyline.getBounds());
+
+          // Detalhes da rota
+          const routeInfo = document.createElement('div');
+          routeInfo.className = 'route-details';
+          routeInfo.innerHTML = `
+            <strong>Rota:</strong> ${route.cities.join(' → ')}<br>
+            <strong>Distância:</strong> ${route.distance} km<br>
+            <strong>Custo:</strong> R$ ${route.cost}<br>
+            <strong>Tempo:</strong> ${route.time}<br>
+            <strong>Cor:</strong> ${route.color}`;
+          document.getElementById('route-info').appendChild(routeInfo);
+        }
+      }
+    }
+
+    drawRoutes();
+  </script>
+</body>
+</html>
